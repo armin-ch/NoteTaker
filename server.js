@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const { join } = require('path')
+const { uid } = require('uid')
 let db = require('./db/db.json')
 
 app.use(express.static(join(__dirname, 'public')))
@@ -18,7 +19,7 @@ app.get('*', (req, res) => {
   res.sendFile(join(__dirname, './public/index.html'))
 })
 app.post('/api/notes', (req, res) => {
-  db.push({'title': req.body.title, 'text': req.body.text})
+  db.push({'title': req.body.title, 'text': req.body.text, id: uid()})
   res.json(db)
-  console.log(req.body)
+  console.log(db)
 })
