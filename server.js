@@ -23,3 +23,12 @@ app.post('/api/notes', (req, res) => {
   res.json(db)
   console.log(db)
 })
+app.delete('/api/notes/:id', (req,res)=>{
+  console.log(req.params)
+  for (let i=0; i<db.length; i++){
+    if (db[i].id == req.params.id){
+      db.splice(i,1)
+      res.json(db)
+    }
+  }
+})
