@@ -3,6 +3,7 @@ const app = express()
 const { join } = require('path')
 const { uid } = require('uid')
 let db = require('./db/db.json')
+const fs = require('fs')
 
 app.use(express.static(join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
@@ -20,6 +21,7 @@ app.get('*', (req, res) => {
 })
 app.post('/api/notes', (req, res) => {
   db.push({'title': req.body.title, 'text': req.body.text, id: uid()})
+  fs.writeFileSync('./db/db.json', JSON.stringify(db))
   res.json(db)
   console.log(db)
 })
@@ -28,6 +30,7 @@ app.delete('/api/notes/:id', (req,res)=>{
   for (let i=0; i<db.length; i++){
     if (db[i].id == req.params.id){
       db.splice(i,1)
+      fs.writeFileSync('./db/db.json', JSON.stringify(db))
       res.json(db)
     }
   }
