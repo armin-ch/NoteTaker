@@ -17,3 +17,7 @@ As a user, you will be able to write and save notes, delete notes you've written
 ## Screenshots
 
 ![Screenshot](screenshot.png)
+
+## Deployment
+
+This app is deployed to heroku. https://note-taker-armin.herokuapp.com/
